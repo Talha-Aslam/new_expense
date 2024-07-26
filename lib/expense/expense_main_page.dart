@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_expense/expense/expense_list_view.dart';
+import 'package:new_expense/expense/new_expense.dart';
 import 'package:new_expense/model/expense_model.dart';
 
 class ExpenseMainPage extends StatefulWidget {
@@ -44,6 +45,23 @@ class _ExpenseMainPageState extends State<ExpenseMainPage> {
     ));
   }
 
+  void _onSavingExpense(ExpenseModel expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
+//Adding new expense by using app bar action button
+  void _onViewExpenseOverlay() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => NewExpense(
+        onSaveExpense: _onSavingExpense,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +71,7 @@ class _ExpenseMainPageState extends State<ExpenseMainPage> {
         title: const Text('Expense_tracker'),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: _onViewExpenseOverlay,
               icon: const Icon(
                 Icons.add,
                 color: Colors.white,
