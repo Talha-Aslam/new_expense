@@ -31,13 +31,12 @@ class _ExpenseMainPageState extends State<ExpenseMainPage> {
     setState(() {
       _registeredExpenses.remove(expense);
     });
-
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: const Text("Expense Deleted"),
       action: SnackBarAction(
           label: "Undo",
           onPressed: () {
-            //asdasd
             setState(() {
               _registeredExpenses.insert(expenseIndex, expense);
             });
@@ -63,6 +62,7 @@ class _ExpenseMainPageState extends State<ExpenseMainPage> {
       ),
       body: ExpenseListView(
         expense: _registeredExpenses,
+        onRemoveExpense: _onRemoveData,
       ),
     );
   }
