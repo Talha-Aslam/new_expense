@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
-enum Category { food, lesiure, work, travel }
+const uuid = Uuid();
 
-const catergoryIcons = {
+final formater = DateFormat.yMd();
+
+enum Category { food, leisure, travel, work }
+
+const categoryIcon = {
   Category.food: Icons.dining_outlined,
-  Category.lesiure: Icons.local_activity_outlined,
-  Category.work: Icons.work_outline_outlined,
+  Category.leisure: Icons.local_activity_outlined,
   Category.travel: Icons.flight_takeoff_rounded,
+  Category.work: Icons.work_outline_rounded,
 };
 
 class ExpenseModel {
   ExpenseModel({
-    required this.title,
     required this.amount,
-    required this.date,
     required this.category,
-  });
+    required this.date,
+    required this.title,
+  }) : id = uuid.v4();
 
+  final String id;
   final String title;
   final double amount;
   final DateTime date;
   final Category category;
+
+  get formateddate {
+    return formater.format(date);
+  }
 }

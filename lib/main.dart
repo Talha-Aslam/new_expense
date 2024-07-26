@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:new_expense/main_widget_screen.dart';
+import "package:flutter/material.dart";
+import "package:new_expense/expense_main_page.dart";
 
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MainWidgetScreen(),
+    home: ExpenseMainPage(),
   ));
 }
